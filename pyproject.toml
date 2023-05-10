@@ -1,0 +1,24 @@
+
+[project]
+name = "product-haven-proto"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Hju Kneyck Flores", email = "hjucode@gmail.com" }]
+dependencies = [
+    "litestar[cli,opentelemetry,picologging,redis]==2.0.0alpha6",
+    "granian>=0.4.0",
+]
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.pdm.dev-dependencies]
+lint = ["ruff>=0.0.265", "pyright>=1.1.306"]
+format = ["black>=23.3.0", "isort>=5.12.0"]
+
+[tool.pdm.scripts]
+format = { composite = ["black app", "isort app"] }
+lint = { composite = ["ruff check app", "pyright"] }
+
+[tool.pyright]
+include = ["app"]
+typeCheckingMode = "strict"
