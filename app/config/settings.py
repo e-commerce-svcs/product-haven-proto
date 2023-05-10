@@ -19,4 +19,4 @@ def get_app_settings() -> AppSettings:
     return config()
 
 
-settings = get_app_settings()
+app_settings = get_app_settings()

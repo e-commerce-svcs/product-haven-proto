@@ -23,6 +23,7 @@ class AppSettings(base.BaseAppSettings):
     openapi_config = openapi.OpenAPIConfig(title=title, version=version)
     allow_origins = ["*"]
     logging_level = logging.INFO
+    db_url: str = "ws://localhost:8000/rpc"
 
     class Config(base.BaseAppSettings.Config):
         validate_assignment = True
