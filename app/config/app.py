@@ -1,6 +1,6 @@
 import logging
 
-from litestar import openapi
+import pydantic
 
 from app.config import base
 
@@ -20,10 +20,9 @@ class AppSettings(base.BaseAppSettings):
     debug = False
     title = "Product Haven"
     version = "0.1.0"
-    openapi_config = openapi.OpenAPIConfig(title=title, version=version)
     allow_origins = ["*"]
     logging_level = logging.INFO
-    db_url: str = "ws://localhost:8000/rpc"
+    db_url = pydantic.AnyUrl(url="ws://localhost:8000/rpc", scheme="ws")
 
     class Config(base.BaseAppSettings.Config):
         validate_assignment = True

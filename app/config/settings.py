@@ -1,21 +1,19 @@
-from functools import lru_cache
-from typing import Type
+import functools
+import typing
 
-from app.config.app import AppSettings
-from app.config.base import AppEnv, BaseAppSettings
-from app.config.dev import DevAppSettings
-from app.config.prod import ProdAppSettings
+from app.config import app, base, dev, prod
 
-environments: dict[AppEnv, Type[AppSettings]] = {
-    AppEnv.DEV: DevAppSettings,
-    AppEnv.PROD: ProdAppSettings,
+environments: dict[base.AppEnv, typing.Type[app.AppSettings]] = {
+    base.AppEnv.DEV: dev.DevAppSettings,
+    base.AppEnv.PROD: prod.ProdAppSettings,
 }
 
 
-@lru_cache
-def get_app_settings() -> AppSettings:
-    app_env = BaseAppSettings().app_env
+@functools.lru_cache
+def get_app_settings() -> app.AppSettings:
+    app_env = base.BaseAppSettings().app_env
     config = environments[app_env]
+
     return config()
 
 

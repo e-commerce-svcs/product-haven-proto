@@ -19,3 +19,6 @@ class BaseAppSettings(pydantic.BaseSettings):
         default=AppEnv.PROD,
         env="APP_ENV",
     )
+
+    class Config(pydantic.BaseSettings.Config):
+        env_file = ".env"
